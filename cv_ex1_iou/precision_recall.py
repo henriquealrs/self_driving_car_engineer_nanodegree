@@ -4,7 +4,7 @@ from iou import calculate_ious
 from utils import get_data
 
 
-def precision_recall(ious, gt_classes, pred_classes):
+def precision_recall(ious: np.ndarray, gt_classes: np.ndarray, pred_classes: np.ndarray):
     """
     calculate precision and recall
     args:
@@ -15,7 +15,17 @@ def precision_recall(ious, gt_classes, pred_classes):
     - precision [float]
     - recall [float]
     """
-    # IMPLEMENT THIS FUNCTION
+    tp = 0
+    fp = 0
+    gt_idxs, pred_idxs = np.where(ious > 0.5)
+    for gt_idx, pred_idx in zip(gt_idxs, pred_idxs):
+        if gt_classes[gt_idx] == pred_classes[pred_idx]:
+            tp+=1
+        else:
+            fp+=1
+    precision = tp/(tp+fp)
+    fn = len(gt_classes) - len(np.unique(pred_idxs))
+    recall = tp/(tp + fn)
     return precision, recall
 
 

@@ -41,8 +41,6 @@ def calculate_iou(gt_bbox, pred_bbox):
     - iou [float]: iou between 2 bboxes
     """
     ## IMPLEMENT THIS FUNCTION
-    gt_points = get_all_points(gt_bbox)
-    pred_points = get_all_points(pred_bbox)
     x_diff = max(0, min(gt_bbox[2], pred_bbox[2]) - max(gt_bbox[0], pred_bbox[0]))
     y_diff = max(0, min(gt_bbox[3], pred_bbox[3]) - max(gt_bbox[1], pred_bbox[1]))
     intersection = x_diff * y_diff
